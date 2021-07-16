@@ -6,11 +6,11 @@ const hearts = document.querySelectorAll('.tries img');
 let missed = 0;
 
 const phrases = [
-    'your momma so fat',
-    'your momma so ugly',
-    'your momma so lame',
-    'your momma so nerdy',
-    'your momma so manly'
+    'playboi carti',
+    'tyler the creator',
+    'biggie smalls',
+    'tupac',
+    'drake'
 ]
 
 function random_num(low, high) {
@@ -66,7 +66,6 @@ function checkLetter(button) {
     for (i = 0; i < allLetters.length; i++) {
         if (button.textContent === allLetters[i].innerText) {
             allLetters[i].className += ' show';
-            allLetters[i].classList.toggle = 'trans'; 
             match = button.textContent;
         }
     }
@@ -74,7 +73,23 @@ function checkLetter(button) {
 }
 
 function resetGame() {
+    function resetClassNames(array) {
+        for (i = 0; i < array.length; i++)
+            array[i].className = '';
+    }
+    const allLetters = phrase.querySelectorAll('li');
+    const allKeys = document.querySelectorAll('#qwerty button');
+    resetClassNames(allLetters);
+    resetClassNames(allKeys);
+    for (i = 0; i < allLetters.length; i++){
+        phrase.removeChild(allLetters[i]);
+    };
+    for (i = 0; i < hearts.length; i++){
+        hearts[i].src='images/liveHeart.png';
+    };
+    displayPhrase(splitPhrase(choosePhrase(phrases))); 
     missed = 0;
+    document.querySelector('#overlay').style.display = 'none';
 }
 
 startButton.addEventListener('click', (e) => {
@@ -83,6 +98,7 @@ startButton.addEventListener('click', (e) => {
             document.querySelector('#overlay').style.display = 'none';
             break;
         case 'Restart':
+            resetGame();
             break;
         default: 
             break;
@@ -100,7 +116,6 @@ qwerty.addEventListener('click', (e) => {
         checkWin();
     }
 });
-
 
 displayPhrase(splitPhrase(choosePhrase(phrases))); 
 
