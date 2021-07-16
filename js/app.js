@@ -14,7 +14,7 @@ const phrases = [
     'future',
     'smoke purrp',
     'migos'
-]
+];
 
 function random_num(low, high) {
     const num = Math.floor(Math.random() * (high - low + 1)) + low;
@@ -33,7 +33,7 @@ function splitPhrase(phrase) {
 }
 
 function displayPhrase(letterArr) {
-    for (i = 0; i < letterArr.length; i++) {
+    for (let i = 0; i < letterArr.length; i++) {
         let letter = document.createElement('li');
         letter.textContent = `${letterArr[i]}`;
         if ( letterArr[i] === ' ' ) {
@@ -68,7 +68,7 @@ function checkWin() {
 function checkLetter(button) {
     const allLetters = phrase.querySelectorAll('li');
     let match = null;
-    for (i = 0; i < allLetters.length; i++) {
+    for (let i = 0; i < allLetters.length; i++) {
         if (button.textContent === allLetters[i].innerText) {
             allLetters[i].className += ' show';
             match = button.textContent;
@@ -81,13 +81,13 @@ function resetGame() {
     const allLetters = phrase.querySelectorAll('li');
     const allKeys = document.querySelectorAll('#qwerty button');
     function resetClassNames(array) {
-        for (i = 0; i < array.length; i++)
+        for (let i = 0; i < array.length; i++)
             array[i].className = '';
     }
     function removeChildren(array) {
-        for (i = 0; i < array.length; i++){
+        for (let i = 0; i < array.length; i++){
             phrase.removeChild(array[i]);
-        };
+        }
     }
     function resetLetters(array) {
         resetClassNames(array);
@@ -95,9 +95,10 @@ function resetGame() {
     }
     resetLetters(allLetters);
     resetClassNames(allKeys);
-    for (i = 0; i < hearts.length; i++){
+    // reset hearts
+    for (let i = 0; i < hearts.length; i++){
         hearts[i].src='images/liveHeart.png';
-    };
+    }
     displayPhrase(splitPhrase(choosePhrase(phrases))); 
     missed = 0;
     overlay.style.display = 'none';
