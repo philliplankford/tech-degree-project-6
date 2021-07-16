@@ -2,7 +2,7 @@ const qwerty = document.querySelector('#qwerty');
 const phrase = document.querySelector('#phrase ul');
 const startButton = document.querySelector('.btn_reset');
 const overlay = document.querySelector('#overlay');
-const hearts = document.querySelector('#scoreboard ol');
+const hearts = document.querySelectorAll('.tries img');
 let missed = 0;
 
 const phrases = [
@@ -42,7 +42,6 @@ function displayPhrase(letterArr) {
     }
 }
 
-
 function checkWin() {
     const letter = document.querySelectorAll('.letter');
     const show = document.querySelectorAll('.show');
@@ -67,6 +66,7 @@ function checkLetter(button) {
     for (i = 0; i < allLetters.length; i++) {
         if (button.textContent === allLetters[i].innerText) {
             allLetters[i].className += ' show';
+            allLetters[i].classList.toggle = 'trans'; 
             match = button.textContent;
         }
     }
@@ -90,16 +90,18 @@ startButton.addEventListener('click', (e) => {
 });
 
 qwerty.addEventListener('click', (e) => {
-    if (e.target.className !== 'chosen') {
+    if (e.target.className !== 'chosen' && e.target.tagName === 'BUTTON') {
         e.target.className = 'chosen';
         const letter = checkLetter(e.target);
         if ( !letter ) { 
-            heart = hearts.firstElementChild;
-            hearts.removeChild(heart);
-            missed++; }
+            missed++;
+            hearts[5 - missed].src='images/lostHeart.png';
+         }
         checkWin();
     }
 });
 
 
 displayPhrase(splitPhrase(choosePhrase(phrases))); 
+
+// e.target.classList.toggle('transition');

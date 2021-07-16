@@ -95,6 +95,8 @@ button {
 .show {
   color: #000;
   background-color: #76CE82;
+  transform: rotate(360deg);
+  transition: all 1s ease-in-out;
 }
 
 /* Keyboard */
@@ -132,6 +134,7 @@ button {
   left: 0;
   right: 0;
   border-radius: 5px;
+  z-index: 50; /* why does this need to be here? Transition is making the letters appear above overlay*/
 }
 
 .title {
