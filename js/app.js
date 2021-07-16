@@ -71,7 +71,7 @@ function checkLetter(button) {
     let match = null;
     for (let i = 0; i < allLetters.length; i++) {
         if (button.textContent === allLetters[i].innerText) {
-            allLetters[i].className += ' show';
+            allLetters[i].classList.add('show');
             match = button.textContent;
         }
     }
