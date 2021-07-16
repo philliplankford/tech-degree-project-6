@@ -10,7 +10,10 @@ const phrases = [
     'tyler the creator',
     'biggie smalls',
     'tupac',
-    'drake'
+    'drake',
+    'future',
+    'smoke purrp',
+    'migos'
 ]
 
 function random_num(low, high) {
@@ -42,6 +45,9 @@ function displayPhrase(letterArr) {
     }
 }
 
+// add the phrase to the display
+displayPhrase(splitPhrase(choosePhrase(phrases))); 
+
 function checkWin() {
     const letter = document.querySelectorAll('.letter');
     const show = document.querySelectorAll('.show');
@@ -57,7 +63,6 @@ function checkWin() {
         startButton.textContent = 'Restart';
         overlay.style.display = 'flex';
     }
-
 }
 
 function checkLetter(button) {
@@ -73,29 +78,35 @@ function checkLetter(button) {
 }
 
 function resetGame() {
+    const allLetters = phrase.querySelectorAll('li');
+    const allKeys = document.querySelectorAll('#qwerty button');
     function resetClassNames(array) {
         for (i = 0; i < array.length; i++)
             array[i].className = '';
     }
-    const allLetters = phrase.querySelectorAll('li');
-    const allKeys = document.querySelectorAll('#qwerty button');
-    resetClassNames(allLetters);
+    function removeChildren(array) {
+        for (i = 0; i < array.length; i++){
+            phrase.removeChild(array[i]);
+        };
+    }
+    function resetLetters(array) {
+        resetClassNames(array);
+        removeChildren(array);
+    }
+    resetLetters(allLetters);
     resetClassNames(allKeys);
-    for (i = 0; i < allLetters.length; i++){
-        phrase.removeChild(allLetters[i]);
-    };
     for (i = 0; i < hearts.length; i++){
         hearts[i].src='images/liveHeart.png';
     };
     displayPhrase(splitPhrase(choosePhrase(phrases))); 
     missed = 0;
-    document.querySelector('#overlay').style.display = 'none';
+    overlay.style.display = 'none';
 }
 
 startButton.addEventListener('click', (e) => {
     switch (e.target.textContent) {
         case 'Start Game':
-            document.querySelector('#overlay').style.display = 'none';
+            overlay.style.display = 'none';
             break;
         case 'Restart':
             resetGame();
@@ -111,12 +122,8 @@ qwerty.addEventListener('click', (e) => {
         const letter = checkLetter(e.target);
         if ( !letter ) { 
             missed++;
-            hearts[5 - missed].src='images/lostHeart.png';
+            hearts[hearts.length - missed].src='images/lostHeart.png';
          }
         checkWin();
     }
 });
-
-displayPhrase(splitPhrase(choosePhrase(phrases))); 
-
-// e.target.classList.toggle('transition');
