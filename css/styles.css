@@ -134,7 +134,7 @@ button {
   left: 0;
   right: 0;
   border-radius: 5px;
-  z-index: 50; /* why does this need to be here? Transition is making the letters appear above overlay*/
+  z-index: 50; /* added because Transition was making the letters appear above overlay*/
 }
 
 .title {
