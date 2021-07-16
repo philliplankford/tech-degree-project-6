@@ -11,8 +11,9 @@ const phrases = [
     'biggie smalls',
     'tupac',
     'drake',
-    'future',
-    'smoke purrp',
+    'smokepurpp',
+    'childish gambino',
+    'ski mask the slump god',
     'migos'
 ];
 
@@ -55,12 +56,12 @@ function checkWin() {
     if ( letter.length === show.length) {
         overlay.className = 'win';
         heading.innerText = "You've Won!";
-        startButton.textContent = 'Restart';
+        startButton.textContent = 'Go Again';
         overlay.style.display = 'flex';
     } else if ( missed > 4) {
         overlay.className = 'lose';
         heading.innerText = "You Lost!";
-        startButton.textContent = 'Restart';
+        startButton.textContent = 'Go Again';
         overlay.style.display = 'flex';
     }
 }
@@ -109,7 +110,7 @@ startButton.addEventListener('click', (e) => {
         case 'Start Game':
             overlay.style.display = 'none';
             break;
-        case 'Restart':
+        case 'Go Again':
             resetGame();
             break;
         default: 
